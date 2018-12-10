@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/font.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/message.css">
+		
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header>
+          <img src="images/logoempresa.png">
+        </header>
+
+
+        <section class="form-wrap">
+            <h1>Enviar Dinero</h1>
+			<div id="entries">
+			
+			</div>
+			
+			
+			
+            <form id="signinForm">
+              <input type="Email" id="correo" placeholder="CORREO" required>
+              <input type="text" id="cantidad" placeholder="CANTIDAD"  required>
+			  <input type="text" id="mensaje" placeholder="MENSAJE" >
+			
+               <button onclick="myFunction()" type="button" class="btn-menu"><span>Enviar</span></button>
+			   
+            </div>
+			   
+			   
+			   
+            </form>
+        </section>
+		
+		<section class="form-wrap">
+            
+        </section>
+
+        <script src="js/vendor/jquery-3.1.0.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+        <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/cognito-auth.js"></script>
+		<script>
+			function myFunction() {
+			var x = document.getElementById("correo").value;
+			var y = document.getElementById("cantidad").value;
+			var z = document.getElementById("mensaje").value;
+			alert('fueron transferidos'+' '+y+'  ' + 'a la cuenta'+' '+x	 );
+				
+				x.style.color = "red";
+			}
+		</script>
+		<script type ="text/javascript">
+		var API_URL='https://sy8g770ecf.execute-api.us-east-2.amazonaws.com/prod/entries'
+		$(document).ready(function(){
+			$.ajax({
+				type: 'GET',
+				url: API_URL
+				
+				succes: funtion(data){
+					$('#entries').html('');
+
+					data.Items.forEach(function(Rides){
+						$('#entries').append('<p>' + guestbookItems.message + '</p>');
+					})
+				} 
+			});
+		});
+		
+		$('#submitButton').on('click',function(){
+			$.ajax({
+				type: 'POST',
+				url: API_URL
+				data: JSON.stringfy({"message": $('#msg').val()}),
+				
+				contentType:"application/json",
+				
+				succes: funtion(data){
+					location.reload();  
+		});
+		return false;
+		});
+		
+		
+		</script>
+    </body>
+</html>
